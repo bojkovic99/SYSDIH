@@ -1,0 +1,232 @@
+<div class="container-fluid ">
+    <div class="row">
+
+        <div class='col-sm-8 boja'>
+            <a routerLink="/logovanje">Odjava</a>
+        </div>
+        <div class='col-sm-4  prva'>
+
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <form>
+
+                <button class="btn btn-link link" (click)="prikazivanje=0">Zahtevi</button>
+                <button class="btn btn-link link" (click)="prikazivanje=1">Zakazani pacijenti za danas</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-12' align="center" *ngIf='prikazivanje==0' style="align-items: center;">
+
+            <table class="table" style="padding: 150px;">
+                <thead style="background-color: rgb(56, 68, 66); color: white;">
+                    <tr>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Bolest</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+
+
+                    </tr>
+                </thead>
+                <tr *ngFor='let a of pomocno;let i=index'>
+                    <td>
+                        {{a.Ime}}
+                    </td>
+                    <td>
+                        {{a.Prezime}}
+                    </td>
+                    <td>
+                        {{a.Bolest}}
+                    </td>
+                    <td>
+                        <input type="button" value="Karton pacijenta" (click)="prikaziK(a)">
+                    </td>
+                    <td>
+                        <input type="button" value="Prihvati" (click)="prihvati(a)">
+                    </td>
+                    <td>
+                        <input type="button" value="Odbaci" (click)="odbaci(a)">
+                    </td>
+                </tr>
+            </table>
+
+
+            <span *ngIf='this.prikaz2==1' style="padding: 500px;">
+                <table class="table" style="padding: 850px;">
+                    <thead style="background-color: rgb(56, 68, 66); color: white;">
+                        <tr>
+                            <th>Datum pregleda</th>
+                            <th>Dijagnoza</th>
+                            <th>Lek-link</th>
+
+
+                        </tr>
+                    </thead>
+                    <tr *ngFor='let b of kartoni;let i=index'>
+                        <td
+                            [style.background-color]="dojagnozaKarton!=null?(b.Id==dojagnozaKarton.Id?'red':'white'):'white'">
+                            {{b.Datum}}
+                        </td>
+                        <td
+                            [style.background-color]="dojagnozaKarton!=null?(b.Id==dojagnozaKarton.Id?'red':'white'):'white'">
+                            {{b.Dijagnoza}}
+                        </td>
+                        <td *ngIf="b.Lek!=null"
+                            [style.background-color]="dojagnozaKarton!=null?(b.Id==dojagnozaKarton.Id?'red':'white'):'white'">
+                            <a href={{b.Link}} target="_blank" style="color: black; font: outline; ">
+                                {{b.Lek}}</a>
+
+
+                        </td>
+                        <td *ngIf="b.Lek==null">
+                            &nbsp;
+
+                        </td>
+
+                    </tr>
+                </table>
+                <input type="button" value="Zatvori" (click)="prikaz2=0">
+
+            </span>
+
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-12' align="center" *ngIf='prikazivanje==1' style="align-items: center;">
+
+            <table class="table" style="padding: 150px;">
+                <thead style="background-color: rgb(56, 68, 66); color: white;">
+                    <tr>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Vreme</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+
+
+                    </tr>
+                </thead>
+                <tr *ngFor='let a of pacijenti;let i=index'>
+                    <td>
+                        {{a.Ime}}
+                    </td>
+                    <td>
+                        {{a.Prezime}}
+                    </td>
+                    <td>
+                        {{a.Vreme}}
+                    </td>
+                    <td>
+                        <input type="button" value="Karton pacijenta" (click)="prikaziKarto(a)">
+                    </td>
+
+                </tr>
+            </table>
+
+
+            <span *ngIf='this.prikaz2==2' style="padding: 500px;">
+                <table class="table" style="padding: 850px;">
+                    <thead style="background-color: rgb(56, 68, 66); color: white;">
+                        <tr>
+                            <th>Datum pregleda</th>
+                            <th>Dijagnoza</th>
+                            <th>Lek-link</th>
+
+
+                        </tr>
+                    </thead>
+                    <tr *ngFor='let b of kartoni2;let i=index'>
+
+                        <td
+                            [style.background-color]=" dojagnozaKarton!=null?(b.Id==dojagnozaKarton.Id?'red':'white'):'white'">
+                            {{b.Datum}}
+                        </td>
+                        <td
+                            [style.background-color]="dojagnozaKarton!=null?(b.Id==dojagnozaKarton.Id?'red':'white'):'white'">
+                            {{b.Dijagnoza}}
+                        </td>
+                        <td *ngIf="b.Lek!=null"
+                            [style.background-color]="dojagnozaKarton!=null?(b.Id==dojagnozaKarton.Id?'red':'white'):'white'">
+                            <a href={{b.Link}} target="_blank" style="color: black; font: outline; ">
+                                {{b.Lek}}</a>
+
+
+                        </td>
+                        <td *ngIf="b.Lek==null">
+                            &nbsp;
+
+                        </td>
+
+                    </tr>
+                </table>
+                <input type="button" value="Zatvori" (click)="prikaz2=0"> &nbsp;&nbsp;
+                <input type="button" value="Dodaj dijagnozu" (click)="prikaz3=3">
+
+
+
+
+            </span>
+
+        </div>
+    </div>
+</div>
+
+<span [style.padding-top]="1==1?'400px':'0px'">
+    &nbsp;
+</span>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-6' align="center" *ngIf='prikazivanje==1' style="align-items: center;">
+            <form>
+
+                <span *ngIf='this.prikaz3==3' style="padding-top: 400px;">
+                    <table class="table" style="padding: 150px;">
+                        <tr>
+                            <td>Dijagnoza</td>
+                            <td>
+
+                                <textarea class="form-control" name="dijag" [(ngModel)]="dijag"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lek</td>
+                            <td>
+                                <input class="form-control" name="lek" [(ngModel)]="lek"> </td>
+                        </tr>
+                        <tr>
+                            <td>Link</td>
+                            <td>
+                                <input class="form-control" name="link" [(ngModel)]="link">
+                            </td>
+                        </tr>
+
+                    </table>
+                    <input type="button" value="Dodaj" (click)="dodajDi()"> &nbsp;&nbsp;
+
+                    <input type="button" value="Odustani" (click)="odustani()">
+
+                    <span style="color: cadetblue; font-weight: bolder; ">
+                        {{msg}}
+                    </span>
+
+                </span>
+            </form>
+        </div>
+    </div>
+</div>

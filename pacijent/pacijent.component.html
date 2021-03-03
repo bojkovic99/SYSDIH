@@ -1,0 +1,354 @@
+<div class="container-fluid ">
+    <div class="row">
+
+        <div class='col-sm-8 boja'>
+            <a routerLink="/logovanje">Odjava</a>
+        </div>
+        <div class='col-sm-4  prva'>
+
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <form>
+
+                <button class="btn btn-link link" (click)="prikazivanje=0">Zakazivanje za danas</button>
+                <button class="btn btn-link link" (click)="istorija()">Istorija bolesti</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-12' align="center">
+            <form>
+                Izaberite lekara kod koga zelite pregled:
+                <select name="izabrani" [(ngModel)]="izabr">
+                    <option *ngFor='let a of lekari;let i=index' value="{{i}}">{{a.Ime}} {{a.Prezime}} - {{a.Zanimanje}}
+                    </option>
+                </select>
+                <button (click)="izaberi()">Izaberi</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-12' align="center" *ngIf='prikazivanje==1' style="align-items: center;">
+
+            <table class="table">
+                <tr *ngFor='let a of niz;let i=index'>
+                    <td>
+                        {{a}} h
+                    </td>
+                    <span *ngIf='a==11 || a==15'>
+
+                        <td class="pauza">
+                            P A U Z A
+                        </td>
+                        <td class="pauza">
+                            &nbsp;
+                        </td>
+
+
+                    </span>
+                    <span *ngIf='a!=11 && a!=15'>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent==korisnik.Id' class="pauza2">
+                            Vi ste zakazali termin
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent!=korisnik.Id' class="pauza3">
+                            Zauzet termin
+                        </td>
+                        <td *ngIf='zakazano[i]==0'>
+                            <input type="button" value="Zakazi" (click)="zakazi(a)" [disabled]="vecZakazano==1">
+                        </td>
+                        <td *ngIf='zakazano[i]==0'>
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent==korisnik.Id' class="pauza2">
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent!=korisnik.Id' class="pauza3">
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+                        </td>
+
+
+
+                    </span>
+
+
+                </tr>
+            </table>
+
+            <input type="button" value="Zakazivanje za sutra" class="btn btn-secondary" (click)="zakaziSutra()">
+            &nbsp; &nbsp;&nbsp;&nbsp;
+            <input type="button" value="Zakazivanje za prekosutra" class="btn btn-secondary"
+                (click)="zakaziPrekosutra()">
+
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-12' align="center" *ngIf='prikazivanje==2'>
+
+            <table class="table">
+                <tr *ngFor='let a of niz;let i=index'>
+                    <td>
+                        {{a}} h
+                    </td>
+                    <span *ngIf='a==11 || a==15'>
+
+                        <td class="pauza">
+                            P A U Z A
+                        </td>
+                        <td class="pauza">
+                            &nbsp;
+                        </td>
+
+
+
+                    </span>
+                    <span *ngIf='a!=11 && a!=15'>
+
+
+
+                        <td *ngIf='zakazano[i]==0'>
+                            <input type="button" value="Zakazi" (click)="zakaziZaSutra(a)" [disabled]="vecZakazano==1">
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent==korisnik.Id' class="pauza2">
+                            Vi ste zakazali termin
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent!=korisnik.Id' class="pauza3">
+                            Zauzet termin
+                        </td>
+                        <td *ngIf='zakazano[i]==0'>
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent==korisnik.Id' class="pauza2">
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent!=korisnik.Id' class="pauza3">
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+                        </td>
+
+
+
+                    </span>
+
+
+                </tr>
+            </table>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-12' align="center" *ngIf='prikazivanje==3'>
+
+            <table class="table">
+                <tr *ngFor='let a of niz;let i=index'>
+                    <td>
+                        {{a}} h
+                    </td>
+                    <span *ngIf='a==11 || a==15'>
+
+                        <td class="pauza">
+                            P A U Z A
+                        </td>
+                        <td class="pauza">
+                            &nbsp;
+                        </td>
+
+
+                    </span>
+                    <span *ngIf='a!=11 && a!=15'>
+
+
+
+                        <td *ngIf='zakazano[i]==0'>
+                            <input type="button" value="Zakazi" (click)="zakaziZaPrekoSutra(a)"
+                                [disabled]="vecZakazano==1">
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent==korisnik.Id' class="pauza2">
+                            Vi ste zakazali termin
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent!=korisnik.Id' class="pauza3">
+                            Zauzet termin
+                        </td>
+                        <td *ngIf='zakazano[i]==0'>
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent==korisnik.Id' class="pauza2">
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+                        </td>
+                        <td *ngIf='zakazano[i]==1 && rasporedi[i].Pacijent!=korisnik.Id' class="pauza3">
+                            &nbsp; {{rasporedi[i].Kasnjenje}}
+                        </td>
+
+
+
+                    </span>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-12' align="center" *ngIf='prikazivanje==4'>
+
+            <img src="../../assets/slika3.png" width="150px" height="100px">
+            <br>
+
+
+            <span style="font-size: large; font-style: oblique; "> Ne postoji hronično
+                oboljenje za prikaz </span>
+            <br>
+            <img src="../../assets/slika3.png" width="160px" height="90px">
+            <br>
+
+            <table class="table">
+                <thead style="background-color: rgb(56, 68, 66); color: white;">
+                    <tr>
+                        <th>Datum pregleda</th>
+                        <th>Dijagnoza</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let a of pregledi;let i=index'>
+                        <td>
+                            {{a.Datum}}
+                        </td>
+                        <td>
+                            {{a.Dijagnoza}}
+                        </td>
+
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-sm-11' align="center" *ngIf='prikazivanje==5'>
+
+
+
+            <img src="../../assets/slika3.png" width="150px" height="100px">
+            <br>
+            <b>Hronično oboljenje</b>
+            <br>
+            <table>
+                <tr>
+                    <td>
+                        <span style="font-size: large; font-style: oblique; ">
+                            Naziv oboljenja
+                        </span>
+                    </td>
+                    <td>
+                        {{hronicno.Naziv}}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-size: large; font-style: oblique; ">
+                            WHO
+                        </span>
+                    </td>
+                    <td>
+                        <a href={{hronicno.Link}} target="_blank" style="color: black;">Link</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-size: large; font-style: oblique; ">
+                            Recept
+                        </span>
+                    </td>
+                    <td>
+                        <span *ngIf='recept==null'>
+                            <input type="button" value="Zahtev za recept" (click)="zahtevRec()" [disabled]='poslato==1'>
+                        </span>
+                        <span *ngIf='recept!=null'>
+                            Vas recept vazi do: {{recept.Vazenje}}
+                        </span>
+                    </td>
+
+                </tr>
+            </table>
+            <span style="color: red;"> {{poruka}} </span>
+
+
+            <br>
+            <img src="../../assets/slika3.png" width="160px" height="90px">
+            <br>
+
+            <table class="table">
+                <thead style="background-color: rgb(56, 68, 66); color: white;">
+                    <tr>
+                        <th>Datum pregleda</th>
+                        <th>Dijagnoza</th>
+                        <th>Lek-link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let a of pregledi;let i=index'>
+                        <td [style.background-color]="a.Id==dojagnozaKarton.Id?'red':'white'">
+                            {{a.Datum}}
+                        </td>
+                        <td [style.background-color]="a.Id==dojagnozaKarton.Id?'red':'white'">
+                            {{a.Dijagnoza}}
+                        </td>
+                        <td *ngIf="a.Lek!=null" [style.background-color]="a.Id==dojagnozaKarton.Id?'red':'white'">
+                            <a href={{a.Link}} target="_blank" style="color: black; font: outline; ">
+                                {{a.Lek}}</a>
+
+
+                        </td>
+                        <td *ngIf="a.Lek==null">
+                            &nbsp;
+
+                        </td>
+
+
+
+
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>

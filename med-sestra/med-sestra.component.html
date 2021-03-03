@@ -1,0 +1,181 @@
+<div class="container-fluid ">
+    <div class="row">
+
+        <div class='col-sm-8 boja'>
+            <a routerLink="/logovanje">Odjava</a>
+        </div>
+        <div class='col-sm-4  prva'>
+
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <form>
+
+                <button class="btn btn-link link" (click)="prikazivanje=0">Pregled pristiglih zahteva</button>
+                <button class="btn btn-link link" (click)="prikazivanje=1">Dodaj kasnjenje</button>
+                <button class="btn btn-link link" (click)="prikazivanje=2">Pregled danasnjeg rasporeda</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-9' align="center" *ngIf='prikazivanje==0'>
+            <span>
+                Pristigli zahtevi:
+
+                <table class="table table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Korisničko ime</th>
+
+                            <th>Ime</th>
+                            <th>Prezime </th>
+                            <th>Datum rođenja </th>
+                            <th>Mesto </th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of pacijenti; let i=index">
+                            <td>{{a.KorIme}}</td>
+                            <td>Pacijent</td>
+                            <td>{{a.Ime}}</td>
+                            <td>{{a.Prezime}}</td>
+                            <td>{{a.DatumRodjenja}}</td>
+                            <td>{{a.MestoRodjenja}}</td>
+                            <td>{{a.Telefon}}</td>
+                            <td>{{a.Email}}</td>
+                            <td>
+                                <button class='btn btn-success' (click)="prihvati(i)">Prihvati</button>
+                            </td>
+                            <td>
+                                <button class='btn btn-danger' (click)="odbaci1(a)">Odbaci</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+            </span>
+        </div>
+    </div>
+</div>
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-9' align="center" *ngIf='prikazivanje==1'>
+            <span>
+                Pristigli zahtevi:
+
+                <table class="table table-sm">
+
+                    <tr>
+                        <td>Datum</td>
+                        <td>
+                            <input type="date" [(ngModel)]="datum2" name="datum">
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>Vreme</td>
+                        <td>
+                            <input type="number" [(ngModel)]="vr" name="vr" min="8" max="18">
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>Razlog kasnjenja i predvidjeno vreme</td>
+                        <td>
+                            <input type="text" [(ngModel)]="razlog" name="razlog">
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Lekar
+                        </td>
+                        <td>
+                            <select name="izabrani" [(ngModel)]="izabr">
+                                <option *ngFor='let a of lekari;let i=index' value="{{i}}">{{a.Ime}} {{a.Prezime}}
+                                </option>
+                            </select>
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="button" (click)="dodajK()" value="Dodaj">
+                        </td>
+                    </tr>
+
+                </table>
+
+                <span style="color: cadetblue; font-weight: bold;"> {{poruka}} </span>
+
+
+            </span>
+        </div>
+    </div>
+</div>
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-9' align="center" *ngIf='prikazivanje==2'>
+
+            <form>
+                Izaberite lekara kod koga zelite pregled:
+                <select name="izabrani" [(ngModel)]="izabr">
+                    <option *ngFor='let a of lekari;let i=index' value="{{i}}">{{a.Ime}} {{a.Prezime}} - {{a.Zanimanje}}
+                    </option>
+                </select>
+                <button (click)="izaberi()">Izaberi</button>
+
+            </form>
+            <span *ngIf='prikaziKonacno==1'>
+
+                <table class="table" style="padding: 150px;">
+                    <thead style="background-color: rgb(56, 68, 66); color: white;">
+                        <tr>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>Vreme</th>
+                            <th>&nbsp;</th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tr *ngFor='let a of pacijenti2;let i=index'>
+                        <td>
+                            {{a.Ime}}
+                        </td>
+                        <td>
+                            {{a.Prezime}}
+                        </td>
+                        <td>
+                            {{a.Vreme}}
+                        </td>
+                        <td>
+                            {{a.Kasnjenje}}
+                        </td>
+
+
+                    </tr>
+                </table>
+            </span>
+        </div>
+    </div>
+</div>

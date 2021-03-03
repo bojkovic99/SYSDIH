@@ -1,0 +1,180 @@
+<div class="container-fluid ">
+    <div class="row">
+
+        <div class='col-sm-8 boja'>
+            <a routerLink="/logovanje">Odjava</a>
+        </div>
+        <div class='col-sm-4 prva'>
+
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-6'>
+            <form>
+                <button class="btn btn-link link" (click)='reg1()'>Registruj se kao pacijent </button>
+                <button class="btn btn-link link" (click)='reg2()'> Registruj se kao medicinsko osoblje</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class='container-fluid pozadina'>
+
+    <div class="row ">
+        <div class="col-lg-3"></div>
+        <div class='col-lg-6'>
+            <form>
+
+
+
+                <span *ngIf='prikaz==1'>
+                    <table class="table  table-sm">
+                        <tr>
+                            <td>Ime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kime" [(ngModel)]="p.Ime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prezime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kprezime" [(ngModel)]="p.Prezime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Korisničko ime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kusername" [(ngModel)]="p.KorIme">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lozinka</td>
+                            <td>
+                                <input class="form-control" type="password" name="ksifra1" [(ngModel)]="p.Lozinka">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Potvrda lozinke</td>
+                            <td>
+                                <input class="form-control" type="password" name="ksifra2" [(ngModel)]="ksifra2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Datum rođenja</td>
+                            <td>
+                                <input class="form-control" type="date" name="datum" [(ngModel)]="p.DatumRodjenja">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesto stanovanja</td>
+                            <td>
+                                <input class="form-control" type="string" name="mesto" [(ngModel)]="p.MestoRodjenja">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Telefon</td>
+                            <td>
+                                <input class="form-control" type="tel" name="telefon" [(ngModel)]="p.Telefon">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input class="form-control" type="email" name="mail" [(ngModel)]="p.Email">
+                            </td>
+                        </tr>
+
+                        <tr align="right">
+                            <td></td>
+                            <td> <button (click)="registrujP()" class="btn btn-secondary" align="right">Registruj
+                                    se</button></td>
+
+                        </tr>
+                    </table>
+
+                </span>
+                <span *ngIf='prikaz==2'>
+                    <table class="table  table-sm">
+                        <tr>
+                            <td>Ime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kime" [(ngModel)]="m.Ime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prezime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kprezime" [(ngModel)]="m.Prezime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Korisničko ime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kusername" [(ngModel)]="m.KorIme">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lozinka</td>
+                            <td>
+                                <input class="form-control" type="password" name="ksifra1" [(ngModel)]="m.Lozinka">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Potvrda lozinke</td>
+                            <td>
+                                <input class="form-control" type="password" name="ksifra2" [(ngModel)]="ksifra2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Telefon</td>
+                            <td>
+                                <input class="form-control" type="number" name="telefon" [(ngModel)]="m.Telefon">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input class="form-control" type="email" name="mail" [(ngModel)]="m.Email">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tip</td>
+                            <td>
+
+                                <input type="radio" name="radio" [(ngModel)]="m.Tip" value="m"> Medicinsko osoblje
+                                <input type="radio" name="radio" [(ngModel)]="m.Tip" value="l"> Lekar
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Zanimanje</td>
+                            <td>
+                                <input class="form-control" type="email" name="mail" [(ngModel)]="m.Zanimanje">
+                            </td>
+
+                        </tr>
+                        <tr align="right">
+                            <td></td>
+                            <td> <button (click)="registrujSe()" class="btn btn-secondary" align="right">Registruj
+                                    se</button></td>
+
+                        </tr>
+                    </table>
+
+                </span>
+
+
+                <span class="poruka">
+                    {{msg}}
+                </span>
+                <span class="uspeh">
+                    {{poruka}}
+                </span>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>

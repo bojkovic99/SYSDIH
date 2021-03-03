@@ -1,0 +1,75 @@
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+<!--
+<div class="jumbotron jumbotron-fluid pozadina">
+    <div class="container ">
+        POZADINA
+    </div>
+</div> -->
+<div class=" container-fluid firstRow">
+    <div class="row">
+        <div class='col-lg-12'>
+            <a routerLink="/registracija">Registracija</a>
+            <input type="button" class="btn btn-link link" value="">
+        </div>
+    </div>
+</div>
+<div class=' container-fluid ' align="center" style="margin-bottom: 0px;">
+    <div class="row klasa">
+        <div class="col-lg-4"></div>
+        <div class='col-lg-4'>
+            <div class="card fse" style="width: max-content;" align="center">
+                <div class="card-body">
+                    <form id="prijaviSe" method="POST">
+                        <table class="table table-borderless" style="color:black">
+                            <tr>
+                                <td>Korisničko ime</td>
+                                <td>
+                                    <input type="text" class="form-control" name="username" [(ngModel)]="username"
+                                        size="25">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lozinka</td>
+                                <td>
+                                    <input type="password" class="form-control" name="password" [(ngModel)]="password"
+                                        size="25">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" align="center">
+
+                                    &nbsp; &nbsp;&nbsp;
+                                    <input type="submit" class="btn btn-light" value="Prijavi se" (click)="logovanje()">
+                                </td>
+
+                            </tr>
+
+
+                        </table>
+                    </form>
+                    <span class="row" class="poruka">
+                        {{poruka}}
+                    </span>
+
+
+
+                </div>
+            </div>
+
+            <br>
+
+
+
+
+        </div>
+
+    </div>
+</div>

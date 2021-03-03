@@ -1,0 +1,178 @@
+<div class="container-fluid ">
+    <div class="row">
+
+        <div class='col-sm-8 boja'>
+            <a routerLink="/logovanje">Odjava</a>
+        </div>
+        <div class='col-sm-4  prva'>
+
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <form>
+
+                <button class="btn btn-link link" (click)='pristigli()'>Pregled pristiglih zahteva</button>
+                <button class="btn btn-link link" (click)='dodaj()'>Pregled registrovanog medicinskog osoblja</button>
+                <button class="btn btn-link link" (click)="prist='5'">Pregled registrovanih hronicnih oboljenja</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-9' align="center">
+            <span *ngIf="prist=='2'">
+                Pristigli zahtevi:
+                <table align="center" class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Korisničko ime</th>
+
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>Email</th>
+                            <th>Zanimanje</th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of pom2; let i=index">
+                            <td>{{a.KorIme}}</td>
+
+                            <td>{{a.Ime}}</td>
+                            <td>{{a.Prezime}}</td>
+                            <td>{{a.Email}}</td>
+                            <td>{{a.Zanimanje}}</td>
+                            <td>
+                                <button class='btn btn-success' (click)="prihvati(i,1)">Prihvati</button>
+                            </td>
+                            <td>
+                                <button class='btn btn-danger' (click)="odbaci2(a)">Odbaci</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Korisničko ime</th>
+
+                            <th>Ime</th>
+                            <th>Prezime </th>
+                            <th>Datum rođenja </th>
+                            <th>Mesto </th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of pom1; let i=index">
+                            <td>{{a.KorIme}}</td>
+                            <td>{{a.Ime}}</td>
+                            <td>{{a.Prezime}}</td>
+                            <td>{{a.DatumRodjenja}}</td>
+                            <td>{{a.MestoRodjenja}}</td>
+                            <td>{{a.Telefon}}</td>
+                            <td>{{a.Email}}</td>
+                            <td>
+                                <button class='btn btn-success' (click)="prihvati(i,2)">Prihvati</button>
+                            </td>
+                            <td>
+                                <button class='btn btn-danger' (click)="odbaci1(a)">Odbaci</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-md-9'>
+            <span *ngIf="prist=='3'">
+
+
+                Medicinsko osoblje:
+                <form>
+                    <table class="table table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Korisničko ime</th>
+                                <th>Ime</th>
+                                <th>Prezime </th>
+                                <th>Telefon </th>
+                                <th>Email</th>
+                                <th>Zanimanje</th>
+
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of niz2; let i=index">
+                                <td><input type="text" name="{{niz2[i].KorIme}}" [(ngModel)]="a.KorIme" disabled=true>
+                                </td>
+                                <td><input type="text" name="{{niz2[i].Ime}}" [(ngModel)]="niz2[i].Ime"></td>
+                                <td><input type="text" name="{{niz2[i].Prezime}}" [(ngModel)]="niz2[i].Prezime"></td>
+
+                                <td><input type="text" name="{{niz2[i].Telefon}}" [(ngModel)]="a.Telefon"></td>
+                                <td><input type="text" name="{{niz2[i].Email}}" [(ngModel)]="a.Email"></td>
+                                <td><input type="text" name="{{niz2[i].Zanimanje}}" [(ngModel)]="a.Zanimanje"></td>
+                                <td>
+                                    <button class='btn btn-success' (click)="azuriraj2(niz2[i])">Azuriraj</button>
+                                </td>
+                                <td>
+                                    <button class='btn btn-danger' (click)="odbaci2(niz2[i])">Ukloni</button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-md-9'>
+            <span *ngIf="prist=='5'">
+
+                <form>
+                    <table class="table table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Naziv</th>
+                                <th>Link</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of oboljenja; let i=index">
+                                <td>
+                                    {{a.Naziv}}
+                                </td>
+
+                                <td>
+                                    <a href="{{a.Link}}" target="_blank" style="color: black; font: outline;"> Link </a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </span>
+        </div>
+    </div>
+
+</div>
